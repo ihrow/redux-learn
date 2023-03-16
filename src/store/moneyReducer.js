@@ -3,7 +3,9 @@ const defaultState = {
 }
 
 const DEPOSIT = "DEPOSIT";
+export const ASYNC_DEPOSIT = "ASYNC_DEPOSIT";
 const WITHDRAW = "WITHDRAW";
+export const ASYNC_WITHDRAW = "ASYNC_WITHDRAW";
 export const moneyReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "DEPOSIT":
@@ -16,4 +18,6 @@ export const moneyReducer = (state = defaultState, action) => {
 }
 
 export const depositAction = payload => ({type: DEPOSIT, payload})
+export const asyncDepositAction = payload => ({type: ASYNC_DEPOSIT, payload})
 export const withdrawAction = payload => ({type: WITHDRAW, payload})
+export const asyncWithdrawAction = payload => ({type: ASYNC_WITHDRAW, payload})
