@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.bank {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bank-operations {
+    display: flex;
+    flex-direction: row;
+}
+
+.bank-cash-operations, .bank-clients-operations {
+    padding: 0 10px;
+}
+
+.bank-money, .missing-customers, .bank-client {
+    color: white;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.bank-client {
+    color: #ffda33;
+}
+
+.bank-money {
+    font-size: 2rem;
+}
+
+.existing-customers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.missing-customers, .bank-client  {
+    font-size: 1.5rem;
+}
+
+.bank-operation-button {
+    width: 100%;
+    height: 50px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bank-operation-button:active {
+    transform: translateY(4px);
+}
+
+.deposit:hover {
+    background: #006600;
+}
+
+.withdraw:hover {
+    background: #660000;
+}
