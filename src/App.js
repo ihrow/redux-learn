@@ -1,9 +1,7 @@
 import './App.css';
 import {useDispatch, useSelector} from "react-redux";
-import {addClientAction, fetchClients, removeClientAction} from "./vanillaRedux/store/clientReducer";
-// import {asyncDepositAction, asyncWithdrawAction, depositAction, withdrawAction} from "./vanillaRedux/store/moneyReducer";
-// import {fetchCustomers} from "./asyncActions/clients";
-import { deposit, withdraw } from "./reduxToolkit/toolkitReducer";
+import {addClient, addManyClients, deposit, removeClient, withdraw} from "./reduxToolkit/toolkitSlice";
+import {fetchClientsToolkit} from "./reduxToolkit/fetchClientsToolkit";
 
 function App() {
 
@@ -11,33 +9,20 @@ function App() {
   const money = useSelector(state => state.toolkit.money);
   const clients = useSelector(state => state.toolkit.clients)
 
-  // const depositMoney = (cash) => {
-  //   dispatch(depositAction(cash))
-  // }
-
-  // const withdrawMoney = (cash) => {
-  //   dispatch(withdrawAction(cash))
-  // }
-
-  const addClient = name => {
+  const addClientByName = name => {
     const client = {
       name,
       id: Date.now()
     }
-    dispatch(addClientAction(client))
-  }
-
-  const removeClient = client => {
-    dispatch(removeClientAction(client))
+    dispatch(addClient(client))
   }
 
   const removeClientByName = name => {
     const client = {
       name
     }
-    removeClient(client)
+    dispatch(removeClient(client))
   }
-
 
   return (
     <div className="container">
@@ -47,23 +32,23 @@ function App() {
           <div className="bank-cash-operations">
             <button className="bank-operation-button deposit"
                     // onClick={() => depositMoney(Number(prompt("Enter amount: ")))}>Deposit Money
-                    onClick={() => dispatch(deposit())}>Deposit Money
+                    onClick={() => dispatch(deposit(Number(prompt("Enter amount: "))))}>Deposit Money
             </button>
             <button className="bank-operation-button withdraw"
                     // onClick={() => withdrawMoney(Number(prompt("Enter amount: ")))}>Withdraw Money
-                    onClick={() => dispatch(withdraw())}>Withdraw Money
+                    onClick={() => dispatch(withdraw(Number(prompt("Enter amount: "))))}>Withdraw Money
             </button>
           </div>
           <div className="bank-clients-operations">
-            <button className="bank-operation-button client-add" onClick={() => addClient(prompt("Enter name: "))}>Add
+            <button className="bank-operation-button client-add" onClick={() => addClientByName(prompt("Enter name: "))}>Add
               Client
             </button>
             <button className="bank-operation-button client-remove"
                     onClick={() => removeClientByName(prompt("Enter name: "))}>Remove Client
             </button>
             <button className="bank-operation-button client-add"
-                    // onClick={() => dispatch(fetchCustomers())}>Get client database
-                    onClick={() => dispatch(fetchClients())}>Get client database
+                    // onClick={() => dispatch(fetchClientsToolkit())}>Get client database
+                    onClick={() => dispatch(fetchClientsToolkit())}>Get client database
             </button>
           </div>
         </div>
@@ -71,7 +56,7 @@ function App() {
           <div className="existing-customers">
             <span style={{fontSize: "2rem", color: "white"}}>Your clients: </span>
             {clients.map(client =>
-              <div onClick={() => removeClient(client)} className="bank-client" key={client.id}>{client.name}</div>
+              <div onClick={() => dispatch(removeClient(client))} className="bank-client" key={client.id}>{client.name}</div>
             )}
           </div>
           :
