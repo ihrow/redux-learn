@@ -1,14 +1,15 @@
 import './App.css';
 import {useDispatch, useSelector} from "react-redux";
-import {addClientAction, fetchClients, removeClientAction} from "./store/clientReducer";
-import {asyncDepositAction, asyncWithdrawAction, depositAction, withdrawAction} from "./store/moneyReducer";
+import {addClientAction, fetchClients, removeClientAction} from "./vanillaRedux/store/clientReducer";
+// import {asyncDepositAction, asyncWithdrawAction, depositAction, withdrawAction} from "./vanillaRedux/store/moneyReducer";
 // import {fetchCustomers} from "./asyncActions/clients";
+import { deposit, withdraw } from "./reduxToolkit/toolkitReducer";
 
 function App() {
 
   const dispatch = useDispatch();
-  const money = useSelector(state => state.money.money);
-  const clients = useSelector(state => state.clients.clients)
+  const money = useSelector(state => state.toolkit.money);
+  const clients = useSelector(state => state.toolkit.clients)
 
   // const depositMoney = (cash) => {
   //   dispatch(depositAction(cash))
@@ -46,11 +47,11 @@ function App() {
           <div className="bank-cash-operations">
             <button className="bank-operation-button deposit"
                     // onClick={() => depositMoney(Number(prompt("Enter amount: ")))}>Deposit Money
-                    onClick={() => dispatch(asyncDepositAction(Number(prompt("Enter amount: "))))}>Deposit Money
+                    onClick={() => dispatch(deposit())}>Deposit Money
             </button>
             <button className="bank-operation-button withdraw"
                     // onClick={() => withdrawMoney(Number(prompt("Enter amount: ")))}>Withdraw Money
-                    onClick={() => dispatch(asyncWithdrawAction(Number(prompt("Enter amount: "))))}>Withdraw Money
+                    onClick={() => dispatch(withdraw())}>Withdraw Money
             </button>
           </div>
           <div className="bank-clients-operations">
