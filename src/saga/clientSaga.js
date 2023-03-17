@@ -1,5 +1,5 @@
 import { put, takeEvery, call } from 'redux-saga/effects'
-// import {fetchCustomers} from "../asyncActions/clients";
+import {fetchCustomers} from "../asyncActions/clients";
 import {addManyClientsAction, FETCH_CLIENTS} from "../store/clientReducer";
 
 
